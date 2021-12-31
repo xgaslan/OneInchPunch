@@ -13,6 +13,8 @@ namespace BusinessLayer.Repositories.DeparmentRepositories
 
         Task<GetDeparmentByIdResponse> GetDeparmentById(int id);
         Task<PutDeparmentResponse> PutDeparment(PutDeparmentRequest putDeparmentRequest, int id);
+
         Task<bool> DeleteDeparment(int id);
+
     }
 }

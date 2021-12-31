@@ -18,7 +18,7 @@ namespace DataLayer.Entities
         [MaxLength(50)]
         public string Password { get; set; }
         [Required]
-        public virtual Deparment Deparment { get; set; }
+        public Deparment Deparment { get; set; }
         [Required]
         public virtual Role Role { get; set; }
     }

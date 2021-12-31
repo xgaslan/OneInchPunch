@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using BusinessLayer.Requests;
 using BusinessLayer.Responses;
 using DataLayer;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLayer.Repositories.AuthenticationRepository
 {
@@ -16,12 +16,13 @@ namespace BusinessLayer.Repositories.AuthenticationRepository
         }
         public async Task<LoginResponse> Login(LoginRequest loginRequest)
         {
-            var checkUser = _context.Users.SingleOrDefault(u => u.Email == loginRequest.Email);
+            var checkUser = await _context.Users.SingleOrDefaultAsync(u => u.Email == loginRequest.Email);
             
             if (checkUser == null)
             {
                 return null;
             }
+
             var password = checkUser.Password;
             if (password == loginRequest.Password)
             {
@@ -32,7 +33,8 @@ namespace BusinessLayer.Repositories.AuthenticationRepository
                 };
                 return response;
             }
-            return null;
+
+             return null;
         }
     }
 }

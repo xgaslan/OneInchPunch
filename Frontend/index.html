@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Giriş Yap</title>
+        <link rel="stylesheet" href="./styles/login-form.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="title">Giriş Yap</div>
+            <span class="error" id ="error">Kimsin sen çık dışarı çık!!!</span>
+            <form method="post" id="loginForm">
+                <div class="form-details">
+                    <div class="input-box">
+                        <span class="details">Email</span>
+                        <input
+                            type="text"
+                            placeholder="Email"
+                            required
+                            id="email"
+                            name = "email"
+                        />
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Parola</span>
+                        <input
+                            type="text"
+                            placeholder="Parola"
+                            required
+                            id="password"
+                            name = "password"
+                        />
+                    </div>
+                </div>
+                <div class="button-container">
+                    <div class="button">
+                        <input type="submit" value="Giriş Yap" id="loginButton"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <script src="./js/login.js"></script>
+    </body>
+</html>

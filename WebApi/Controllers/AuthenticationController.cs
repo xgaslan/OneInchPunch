@@ -19,6 +19,7 @@ namespace WebApi.Controllers
         {
             _authenticationRepository = authenticationRepository;
         }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginRequest loginRequest)
         {
@@ -27,7 +28,6 @@ namespace WebApi.Controllers
             {
                 return NotFound();
             }
-
             return Ok(response);
         }
     }

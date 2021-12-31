@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer.Repositories.AuthenticationRepository;
+//using BusinessLayer.Repositories.AuthenticationRepository;
 using BusinessLayer.Repositories.DeparmentRepositories;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -34,6 +35,15 @@ namespace WebApi
             services.AddControllers();
 
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DataConnection"), b => b.MigrationsAssembly("WebApi")));
+
+            services.AddCors(co => co.AddPolicy("AllowCustomPolicies",
+                cp =>
+                {
+                        cp.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                }
+            ));
 
             //services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize);
             services.AddControllers().AddNewtonsoftJson(options =>
@@ -75,7 +85,7 @@ namespace WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            
+            app.UseCors("AllowCustomPolicies");
 
             app.UseHttpsRedirection();
 

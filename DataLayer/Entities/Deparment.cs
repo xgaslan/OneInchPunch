@@ -11,6 +11,6 @@ namespace DataLayer.Entities
         [MaxLength(50)]
         public string Name { get; set; }
         [IgnoreDataMember]
-        public virtual ICollection<User> Users{ get; set; }
+        public ICollection<User> Users{ get; set; }
     }
 }

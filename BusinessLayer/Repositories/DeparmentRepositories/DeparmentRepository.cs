@@ -106,10 +106,7 @@ namespace BusinessLayer.Repositories.DeparmentRepositories
 
         public async Task<PutDeparmentResponse> PutDeparment(PutDeparmentRequest putDeparmentRequest, int id)
         {
-
-
             var department = await _context.Deparments.Where(d => d.Id == id).SingleOrDefaultAsync();
-            
 
             var updateEntity = _context.Entry(department);
             updateEntity.Entity.Name = putDeparmentRequest.Name;
@@ -131,15 +128,25 @@ namespace BusinessLayer.Repositories.DeparmentRepositories
 
                 return null;
             }
-
-
-           
-
         }
 
         public async Task<bool> DeleteDeparment(int id)
         {
             var department = await _context.Deparments.Where(d => d.Id == id).SingleOrDefaultAsync();
+            if (department == null)
+            {
+                return false;
+            }
+
+            var departmentUsers = await _context.Deparments
+                .Where(d => d.Id == id)
+                .Include(d => d.Users).ToListAsync();
+
+            if (departmentUsers.Count > 0)
+            {
+                return false;
+            }
+
             var deleteEntity = _context.Entry(department);
             deleteEntity.State = EntityState.Deleted;
 
@@ -153,5 +160,6 @@ namespace BusinessLayer.Repositories.DeparmentRepositories
                 return false;
             }
         }
+       
     }
 }
